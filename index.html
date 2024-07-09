@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px; 
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #6c757d;
+        }
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            margin-bottom: 20px;
+            width: 150%;
+            max-width: 300px; 
+            background-color: #fff;
+            color: #343a40;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Basketball Database</h1>
+    
+    <form id="navigationForm">
+        <label for="pageSelection">Select an option:</label>
+        <select id="pageSelection" name="page">
+            <option value="" selected disabled>--Choose One--</option>
+            <option value="search">Search Database</option>
+            <option value="add_player">Add a Player</option>
+            <option value="update_player">--Update Player Information (delete later)</option>
+        </select>
+        <button type="submit">Go</button>
+    </form>
+
+    <script>
+        document.getElementById('navigationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            var selectedOption = document.getElementById('pageSelection').value;
+            
+            if (selectedOption !== "") {
+                window.location.href = '/' + selectedOption;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Player</title>
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #343a40;
+            margin-bottom: 0px;
+        }
+        form {
+            width: 50%;
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        button {
+            padding: 8px 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Player</h1>
+    
+    <form id="updateForm">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName">
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName">
+
+        <label for="birthDate">Birth Date:</label>
+        <input type="text" id="birthDate" name="birthDate">
+
+        <label for="height">Height (m):</label>
+        <input type="text" id="height" name="height">
+
+        <label for="jerseyNumber">Jersey Number:</label>
+        <input type="text" id="jerseyNumber" name="jerseyNumber">
+
+        <label for="nbaStartYear">NBA Start Year:</label>
+        <input type="text" id="nbaStartYear" name="nbaStartYear">
+
+        <label for="position">Position:</label>
+        <input type="text" id="position" name="position">
+
+        <label for="team">Team:</label>
+        <input type="text" id="team" name="team">
+
+        <label for="weight">Weight (kg):</label>
+        <input type="text" id="weight" name="weight">
+
+        <button type="submit">Update</button>
+    </form>
+
+    <script>
+        // Function to retrieve player information from Firebase and populate the form fields
+        function populateForm(playerId) {
+            fetch('/get_player_info?playerId=' + playerId) // Replace with actual endpoint to retrieve player info
+            .then(response => response.json())
+            .then(player => {
+                document.getElementById('firstName').value = player.firstName;
+                document.getElementById('lastName').value = player.lastName;
+                document.getElementById('birthDate').value = player.birthDate;
+                document.getElementById('height').value = player.height;
+                document.getElementById('jerseyNumber').value = player.jerseyNumber;
+                document.getElementById('nbaStartYear').value = player.nbaStartYear;
+                document.getElementById('position').value = player.position;
+                document.getElementById('team').value = player.team;
+                document.getElementById('weight').value = player.weight;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        // Get player ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const playerId = urlParams.get('playerId');
+
+        // Populate form with player information
+        populateForm(playerId);
+
+        // Handle form submission
+        document.getElementById('updateForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Perform update operation here
+            // Redirect back to search.html after updating
+            window.location.href = '/search';
+        });
+    </script>
+</body>
+</html>
